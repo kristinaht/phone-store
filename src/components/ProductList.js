@@ -5,9 +5,6 @@ import { ProductConsumer } from './../context';
 
 class ProductList extends Component {
 
-  state={
-    products: []
-  }
   render() {
     return (
       <React.Fragment>
