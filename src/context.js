@@ -10,9 +10,25 @@ const ProductContext = React.createContext();
 class ProductProvider extends Component {
 
   state = {  //we grabbed data from data.js and set it as a state
-    products: storeProducts,
+    products: [],
     detailProduct: detailProduct
   }
+
+  componentDidMount() {
+    this.setProducts(); //this way we get copies of product objects, not actual references
+  }
+
+  setProducts = () => {
+    let tempProducts = [];
+    storeProducts.forEach(item => {
+      const singleItem = {...item};
+      tempProducts = [...tempProducts, singleItem];
+    });
+    this.setState( () => {
+      return {products: tempProducts}
+    })
+  }
+
 
   handleDetail = () => {
     console.log("Hello from detail page");
