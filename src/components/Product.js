@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ProductConsumer } from './../context';
+import PropTypes from 'prop-types';
 
 //we are gonna get some information here passed in as an object.
 
@@ -40,6 +41,16 @@ class Product extends Component {
       </ProductWrapper>
     );
   }
+}
+
+Product.propTypes= {
+  product: PropTypes.shape({
+    id: PropTypes.number,
+    img: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    inCart: PropTypes.bool
+  }).isRequired
 }
 
 const ProductWrapper = styled.div`
@@ -89,6 +100,7 @@ const ProductWrapper = styled.div`
   }
   .cart-btn: hover {
     color: var(--mainBlue);
+    cursor: pointer;
   }
 `
 
