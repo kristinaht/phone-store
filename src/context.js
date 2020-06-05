@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { storeProducts, detailProduct } from './data'; //I can import variables!! these will be set as state
 
-//this is where I start using Context API, no need to import/install it, you automatically get it. We just need to create a new context object. We do that by creating a variable and using the createContext() method on React: 
+//this is where I start using Context API, no need to import/install it, you automatically get it. We just need to create a new conte vxt object. We do that by creating a variable and using the createContext() method on React: 
 const ProductContext = React.createContext();
 //Context object comes with 2 components:
 //Provider
@@ -34,8 +34,8 @@ class ProductProvider extends Component {
     console.log("Hello from detail page");
   }
 
-  addToCard = () => {
-    console.log("Hello from add to cart");
+  addToCart = (id) => {
+    console.log(`Hello from add to cart. id is ${id}`);
   }
 
   render() {
@@ -45,8 +45,8 @@ class ProductProvider extends Component {
       <ProductContext.Provider value={{  //you can set objects as value and include any of their methods. You can than access these methods as well in other components
          ...this.state,   //another way:  products: this.state.products etc.
          handleDetail: this.handleDetail,
-         addToCard: this.addToCard
-      }}> 
+         addToCart: this.addToCart
+        }}> 
         {this.props.children}
       </ProductContext.Provider>
     )
