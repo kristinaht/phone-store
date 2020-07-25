@@ -10,7 +10,7 @@ const ProductContext = React.createContext();
 class ProductProvider extends Component {
 
   state = {  //we grabbed data from data.js and set it as a state
-    products: [],
+    products: [],  //it is an empty array initially because if we would assign the storeProducts as the value, actual value of the storeProducts would change as we manipulate the app. This way and by using componentDidMount() we are able to use just copies of actual data, comming from setProducts() method below.
     detailProduct: detailProduct
   }
 
@@ -19,9 +19,9 @@ class ProductProvider extends Component {
   }
 
   setProducts = () => {
-    let tempProducts = [];
+    let tempProducts = []; 
     storeProducts.forEach(item => {
-      const singleItem = {...item};
+      const singleItem = {...item}; // three dots ... mean that I am just copying the values 
       tempProducts = [...tempProducts, singleItem];
     });
     this.setState( () => {
@@ -29,8 +29,13 @@ class ProductProvider extends Component {
     })
   }
 
+  //utility method that gets the item according to id
+  getItem = (id) => {
+    const product = this.state.products.find(item => item.id === id);
+    return product;
+  }
 
-  handleDetail = () => {
+  handleDetail = (id) => {
     console.log("Hello from detail page");
   }
 
