@@ -13,7 +13,7 @@ class ProductProvider extends Component {
     products: [],  //it is an empty array initially because if we would assign the storeProducts as the value, actual value of the storeProducts would change as we manipulate the app. This way and by using componentDidMount() we are able to use just copies of actual data, comming from setProducts() method below.
     detailProduct: detailProduct,
     cart: [],
-    modalOpen: true,
+    modalOpen: false,
     modalProduct: detailProduct
   }
 
