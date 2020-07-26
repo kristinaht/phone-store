@@ -12,7 +12,9 @@ class ProductProvider extends Component {
   state = {  //we grabbed data from data.js and set it as a state
     products: [],  //it is an empty array initially because if we would assign the storeProducts as the value, actual value of the storeProducts would change as we manipulate the app. This way and by using componentDidMount() we are able to use just copies of actual data, comming from setProducts() method below.
     detailProduct: detailProduct,
-    cart: []
+    cart: [],
+    modalOpen: true,
+    modalProduct: detailProduct
   }
 
   componentDidMount() {
@@ -60,6 +62,19 @@ class ProductProvider extends Component {
 
   }
 
+  openModal = (id) => {
+    const product = this.getItem(id);
+    this.setState(() => {
+      return {modalProduct: product, modalOpen: true}
+    })
+  }
+
+  closeModal = () => {
+    this.setState(() => {
+      return {modalOpen: false}
+    })
+  }
+
   render() {
     return(
       //ProductContext.Provider is sitting on top of my component tree.
@@ -67,7 +82,9 @@ class ProductProvider extends Component {
       <ProductContext.Provider value={{  //you can set objects as value and include any of their methods. You can than access these methods as well in other components
          ...this.state,   //another way:  products: this.state.products etc.
          handleDetail: this.handleDetail,
-         addToCart: this.addToCart
+         addToCart: this.addToCart,
+         openModal: this.openModal,
+         closeModal: this.closeModal
         }}> 
         {this.props.children}
       </ProductContext.Provider>
