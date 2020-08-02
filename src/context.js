@@ -89,7 +89,24 @@ class ProductProvider extends Component {
   }
 
   removeItem = (id) => {
-    console.log('item removed')
+    let tempProducts = [...this.state.products];
+    let tempCart = [...this.state.cart];
+    tempCart = tempCart.filter(item => item.id !== id);
+    const index = tempProducts.indexOf(this.getItem(id)); //this gives us the index of the actual product that we want to remove.
+    let removedProduct = tempProducts[index];
+    //we also need to change a few properties of the removedProduct back to their default values:
+    removedProduct.inCart = false;
+    removedProduct.count = 0;
+    removedProduct.total = 0;
+
+    this.setState(() => {
+      return {
+        cart: [...tempCart],
+        products: [...tempProducts] //removedProduct got its properties changed back to default, so it will not be included in the cart (inCart changed to false etc.)
+      }
+    }, () => {
+      this.addTotals();
+    })
   }
 
   clearCart = (id) => {   //arrow functions are used so taht we don't have to use constructor and bind these methods in the constructor
