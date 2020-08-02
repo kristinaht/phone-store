@@ -93,7 +93,12 @@ class ProductProvider extends Component {
   }
 
   clearCart = (id) => {   //arrow functions are used so taht we don't have to use constructor and bind these methods in the constructor
-    console.log('cart cleared')
+    this.setState(() => {
+      return { cart: [] }
+    },() => {
+      this.setProducts(); //because all the products that have been added to the cart have been actually modified(their props/values are modified, for example, inCart is changed to true, and we need to change it back to false), we need to call the setProducts() method to change them back to their default state
+      this.addTotals();
+    })
   }
 
   addTotals = () => {
